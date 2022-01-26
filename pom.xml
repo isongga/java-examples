@@ -15,6 +15,7 @@
         <module>javase</module>
         <module>guava</module>
         <module>data-structure</module>
+        <module>blockchain-demo</module>
     </modules>
 
     <properties>
