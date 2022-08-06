@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: contract-service
+server:
+  port: ${PORT:8090}
+web3j:
+  client-address: https://pub001.hg.network/rpc
