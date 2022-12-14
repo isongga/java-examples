@@ -1,4 +1,4 @@
-package com.rj.spring.demo.bean.definition;
+package com.rj.demo.springbean.definition;
 
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 

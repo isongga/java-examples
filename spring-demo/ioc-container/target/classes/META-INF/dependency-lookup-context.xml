@@ -5,6 +5,6 @@
         xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" class="com.rj.spring.demo.ioc.model.User"/>
+    <bean id="user" class="com.rj.demo.spring.ioc.model.User"/>
 
 </beans>
