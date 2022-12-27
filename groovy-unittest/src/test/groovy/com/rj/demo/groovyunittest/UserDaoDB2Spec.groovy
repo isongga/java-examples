@@ -3,11 +3,13 @@ package com.rj.demo.groovyunittest
 import be.janbols.spock.extension.dbunit.DbUnit
 import spock.lang.Specification
 
+import javax.sql.DataSource
+
+
 class UserDaoDB2Spec extends Specification{
-    def datasource
+    DataSource datasource
 
-    @DbUnit(datasourceProvider = {datasource})
-
+    @DbUnit
     def content = {
         User(userId:1001, userName: "xiaoliang")
     }

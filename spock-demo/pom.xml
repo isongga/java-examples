@@ -13,33 +13,33 @@
 
     <dependencies>
 
-        <dependency> <!-- use a specific Groovy version rather than the one specified by spock-core -->
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>4.0.6</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency> &lt;!&ndash; use a specific Groovy version rather than the one specified by spock-core &ndash;&gt;-->
+<!--            <groupId>org.apache.groovy</groupId>-->
+<!--            <artifactId>groovy-all</artifactId>-->
+<!--            <version>4.0.6</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
 
-        <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
-            <version>2.3-groovy-4.0</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.spockframework</groupId>-->
+<!--            <artifactId>spock-core</artifactId>-->
+<!--            <version>2.3-groovy-4.0</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.dbunit</groupId>
-            <artifactId>dbunit</artifactId>
-            <version>2.5.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.200</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.dbunit</groupId>-->
+<!--            <artifactId>dbunit</artifactId>-->
+<!--            <version>2.5.1</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.h2database</groupId>-->
+<!--            <artifactId>h2</artifactId>-->
+<!--            <version>1.4.200</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
     </dependencies>
 
 

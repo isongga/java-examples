@@ -14,7 +14,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <groovy.version>4.0.6</groovy.version>
+<!--        <groovy.version>4.0.6</groovy.version>-->
     </properties>
 
     <dependencies>
@@ -27,11 +27,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -42,13 +42,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
         <dependency> <!-- use a specific Groovy version rather than the one specified by spock-core -->
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>2.4.4</version>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.spockframework</groupId>
@@ -76,6 +77,12 @@
             <version>1.4.200</version>
             <scope>test</scope>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat</groupId>-->
+<!--            <artifactId>tomcat-jdbc</artifactId>-->
+<!--            <version>7.0.27</version>-->
+<!--        </dependency>-->
 
 
     </dependencies>

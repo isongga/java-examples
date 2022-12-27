@@ -2,6 +2,7 @@ package com.rj.demo.groovyunittest;
 
 import com.zaxxer.hikari.HikariDataSource
 import groovy.sql.Sql
+
 import javax.sql.DataSource
 
 class SpecUtils {
@@ -13,6 +14,14 @@ class SpecUtils {
             dataSource.password = ''
             dataSource
         }
+
+//        return new DataSource().with { dataSource ->
+//            dataSource.driverClassName = 'org.h2.Driver'
+//            dataSource.url = 'jdbc:h2:mem:'
+//            dataSource.username = 'sa'
+//            dataSource.password = ''
+//            dataSource
+//        }
     }
 
     static void createUserTable(DataSource dataSource) {

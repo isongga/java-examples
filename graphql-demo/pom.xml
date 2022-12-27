@@ -17,6 +17,14 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -28,18 +36,105 @@
             <version>26.0-jre</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.graphql-java</groupId>
-            <artifactId>graphql-java</artifactId>
-            <version>11.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.graphql-java</groupId>-->
+<!--            <artifactId>graphql-java-spring-boot-starter-webmvc</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.graphql-java</groupId>-->
+<!--            <artifactId>graphql-java</artifactId>-->
+<!--            <version>14.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.graphql-java-kickstart</groupId>-->
+<!--            <artifactId>graphql-spring-boot-starter</artifactId>-->
+<!--            <version>7.0.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.graphql-java-kickstart</groupId>-->
+<!--            <artifactId>graphql-kickstart-spring-boot-starter-tools</artifactId>-->
+<!--            <version>7.0.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.graphql-java-kickstart</groupId>-->
+<!--            <artifactId>voyager-spring-boot-starter</artifactId>-->
+<!--            <version>7.0.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.graphql-java-kickstart</groupId>-->
+<!--            <artifactId>graphql-spring-boot-starter-test</artifactId>-->
+<!--            <version>7.0.1</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.graphql-java-kickstart</groupId>-->
+<!--            <artifactId>graphql-java-tools</artifactId>-->
+<!--            <version>6.0.2</version>-->
+<!--        </dependency>-->
 
         <dependency>
-            <groupId>com.graphql-java</groupId>
-            <artifactId>graphql-java-spring-boot-starter-webmvc</artifactId>
-            <version>1.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <!--这里是配置generatorConfig.xml的路径 不写默认在resources目录下找generatorConfig.xml文件 -->
+                    <configurationFile>${project.basedir}/src/main/resources/mybatis-generator.xml</configurationFile>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.22</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>io.github.kobylynskyi</groupId>-->
+<!--                <artifactId>graphql-codegen-maven-plugin</artifactId>-->
+<!--                <version>5.5.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash; all config options:-->
+<!--                            https://github.com/kobylynskyi/graphql-java-codegen/blob/master/docs/codegen-options.md-->
+<!--                            &ndash;&gt;-->
+<!--                            <graphqlSchemas>-->
+<!--                                <includePattern>schema\.graphqls</includePattern>-->
+<!--                            </graphqlSchemas>-->
+<!--                            <outputDir>${project.basedir}/src/main/java</outputDir>-->
+<!--                            <packageName>com.rj.demo.graphql.model</packageName>-->
+<!--                            <customTypesMapping>-->
+<!--                                <DateTime>java.util.Date</DateTime>-->
+<!--                                <Price.amount>java.math.BigDecimal</Price.amount>-->
+<!--                            </customTypesMapping>-->
+<!--                            <customAnnotationsMapping>-->
+<!--                                <EpochMillis>-->
+<!--                                    <annotation>com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.example.json.EpochMillisScalarDeserializer.class)</annotation>-->
+<!--                                </EpochMillis>-->
+<!--                            </customAnnotationsMapping>-->
+<!--                            <modelNameSuffix>TO</modelNameSuffix>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+        </plugins>
+    </build>
 
 
 </project>
