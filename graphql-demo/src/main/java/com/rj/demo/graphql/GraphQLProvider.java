@@ -1,24 +1,24 @@
-package com.rj.demo.graphql;
-
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-import graphql.GraphQL;
-import graphql.schema.GraphQLSchema;
-import graphql.schema.idl.RuntimeWiring;
-import graphql.schema.idl.SchemaGenerator;
-import graphql.schema.idl.SchemaParser;
-import graphql.schema.idl.TypeDefinitionRegistry;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.net.URL;
-
-import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
-
-
+//package com.rj.demo.graphql;
+//
+//import com.google.common.base.Charsets;
+//import com.google.common.io.Resources;
+//import graphql.GraphQL;
+//import graphql.schema.GraphQLSchema;
+//import graphql.schema.idl.RuntimeWiring;
+//import graphql.schema.idl.SchemaGenerator;
+//import graphql.schema.idl.SchemaParser;
+//import graphql.schema.idl.TypeDefinitionRegistry;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.stereotype.Component;
+//
+//import javax.annotation.PostConstruct;
+//import java.io.IOException;
+//import java.net.URL;
+//
+//import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
+//
+//
 //@Component
 //public class GraphQLProvider {
 //    private GraphQL graphQL;
@@ -30,7 +30,7 @@ import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 //
 //    @PostConstruct
 //    public void init() throws IOException {
-//        URL url = Resources.getResource("schema.graphqls");
+//        URL url = Resources.getResource("schema/schema.graphqls");
 //        String sdl = Resources.toString(url, Charsets.UTF_8);
 //        GraphQLSchema graphQLSchema = buildSchema(sdl);
 //        this.graphQL = GraphQL.newGraphQL(graphQLSchema).build();

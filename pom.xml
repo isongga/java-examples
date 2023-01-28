@@ -28,6 +28,8 @@
         <module>groovy-unittest</module>
         <module>mybatis</module>
         <module>spock-demo</module>
+        <module>graphql-with-dgs-demo</module>
+        <module>blockchain-diy</module>
     </modules>
 
     <dependencyManagement>

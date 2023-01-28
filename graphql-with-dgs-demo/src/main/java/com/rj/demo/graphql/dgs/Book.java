@@ -1,4 +1,4 @@
-package com.rj.demo.graphql.entity;
+package com.rj.demo.graphql.dgs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ public class Book {
 
     private Integer authorId;
 
-    private static List<Book> books = Arrays.asList(
+    public static List<Book> books = Arrays.asList(
             new Book(1, "Harry Potter and the Philosopher's Stone", 223, 1),
             new Book(2, "Moby Dick", 635, 2),
             new Book(3, "Interview with the vampire", 371, 3)

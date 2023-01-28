@@ -1,7 +1,6 @@
-package com.rj.demo.graphql.dao;
+package com.rj.demo.graphql.dgs.dao;
 
-import com.rj.demo.graphql.entity.Author;
-import java.util.List;
+import com.rj.demo.graphql.dgs.Author;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,6 +10,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Mapper

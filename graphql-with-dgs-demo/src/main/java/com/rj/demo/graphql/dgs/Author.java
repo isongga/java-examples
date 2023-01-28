@@ -1,4 +1,4 @@
-package com.rj.demo.graphql.entity;
+package com.rj.demo.graphql.dgs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

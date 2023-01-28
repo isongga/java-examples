@@ -1,0 +1,21 @@
+type Query {
+  bookById(id: Int): Book
+  allBooks: [Book]
+}
+
+schema{
+    query: Query
+}
+
+type Book {
+  id: Int
+  name: String
+  pageCount: Int
+  author: Author
+}
+
+type Author {
+  id: Int
+  firstName: String
+  lastName: String
+}
