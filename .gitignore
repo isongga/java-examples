@@ -1,4 +1,5 @@
 ### Operating System Files ###
+blockchain.db
 *.DS_Store
 Thumbs.db
 *.sw?
