@@ -1,5 +1,6 @@
 package com.rj.demo.blockchain.diy.block;
 
+import com.rj.demo.blockchain.diy.transaction.Transaction;
 import com.rj.demo.blockchain.diy.util.ByteUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,15 +17,15 @@ import java.time.Instant;
 public class Block {
     private String hash;
     private String prevBlockHash;
-    private String data;
+    private Transaction[] transactions;
     /**
      * 工作量证明计数器
      */
     private long nonce;
     private long timestamp;
 
-    public static Block newBlock(String previousHash, String data) {
-        Block block = new Block("", previousHash, data,  0,Instant.now().getEpochSecond());
+    public static Block newBlock(String previousHash, Transaction[] transactions) {
+        Block block = new Block("", previousHash, transactions,  0,Instant.now().getEpochSecond());
         ProofOfWork pow = ProofOfWork.newProofOfWork(block);
         PowResult powResult = pow.run();
         block.setHash(powResult.getHash());
@@ -46,8 +47,16 @@ public class Block {
 //        this.setHash(DigestUtils.sha256Hex(headers));
 //    }
 
-    public static Block newGenesisBlock() {
-        return Block.newBlock("", "Genesis Block");
+    public static Block newGenesisBlock(Transaction coinbase) {
+        return Block.newBlock("", new Transaction[]{coinbase});
+    }
+
+    public byte[] hashTransaction() {
+        byte[][] txIdArrays = new byte[this.getTransactions().length][];
+        for (int i = 0; i < this.getTransactions().length; i++) {
+            txIdArrays[i] = this.getTransactions()[i].getTxId();
+        }
+        return DigestUtils.sha256(ByteUtils.merge(txIdArrays));
     }
 
 }

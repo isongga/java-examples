@@ -2,6 +2,8 @@ package com.rj.demo.blockchain.diy;
 
 import com.rj.demo.blockchain.diy.block.Block;
 import com.rj.demo.blockchain.diy.block.Blockchain;
+import com.rj.demo.blockchain.diy.transaction.TXOutput;
+import com.rj.demo.blockchain.diy.transaction.Transaction;
 import com.rj.demo.blockchain.diy.util.Base58Check;
 import com.rj.demo.blockchain.diy.util.RocksDBUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -157,22 +159,30 @@ public class CLI {
 //            log.error("ERROR: invalid wallet address", e);
 //            throw new RuntimeException("ERROR: invalid wallet address", e);
 //        }
-//
-//        // 得到公钥Hash值
+
+        // 得到公钥Hash值
 //        byte[] versionedPayload = Base58Check.base58ToBytes(address);
 //        byte[] pubKeyHash = Arrays.copyOfRange(versionedPayload, 1, versionedPayload.length);
-//
-//        Blockchain blockchain = Blockchain.createBlockchain(address);
+
+        Blockchain blockchain = Blockchain.createBlockchain(address);
 //        UTXOSet utxoSet = new UTXOSet(blockchain);
 //
 //        TXOutput[] txOutputs = utxoSet.findUTXOs(pubKeyHash);
-//        int balance = 0;
-//        if (txOutputs != null && txOutputs.length > 0) {
-//            for (TXOutput txOutput : txOutputs) {
-//                balance += txOutput.getValue();
-//            }
-//        }
-//        log.info("Balance of '{}': {}\n", new Object[]{address, balance});
+
+        TXOutput[] txOutputs = new TXOutput[0];
+        try {
+            txOutputs = blockchain.findUTXO(address);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        int balance = 0;
+        if (txOutputs != null && txOutputs.length > 0) {
+            for (TXOutput txOutput : txOutputs) {
+                balance += txOutput.getValue();
+            }
+        }
+        log.info("Balance of '{}': {}\n", new Object[]{address, balance});
     }
 
     /**
@@ -202,14 +212,14 @@ public class CLI {
 //            log.error("ERROR: amount invalid ! amount=" + amount);
 //            throw new RuntimeException("ERROR: amount invalid ! amount=" + amount);
 //        }
-//        Blockchain blockchain = Blockchain.createBlockchain(from);
-//        // 新交易
-//        Transaction transaction = Transaction.newUTXOTransaction(from, to, amount, blockchain);
-//        // 奖励
-//        Transaction rewardTx = Transaction.newCoinbaseTX(from, "");
-//        Block newBlock = blockchain.mineBlock(new Transaction[]{transaction, rewardTx});
+        Blockchain blockchain = Blockchain.createBlockchain(from);
+        // 新交易
+        Transaction transaction = Transaction.newUTXOTransaction(from, to, amount, blockchain);
+        // 奖励
+        Transaction rewardTx = Transaction.newCoinbaseTX(from, "");
+        blockchain.mineBlock(new Transaction[]{transaction, rewardTx});
 //        new UTXOSet(blockchain).update(newBlock);
-//        log.info("Success!");
+        log.info("Success!");
     }
 
     /**

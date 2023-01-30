@@ -27,6 +27,7 @@ public class TXInput {
      */
     private int txOutputIndex;
 
+    // 解锁脚本
     private String scriptSig;
 //    /**
 //     * 签名
@@ -47,5 +48,15 @@ public class TXInput {
 //        byte[] lockingHash = BtcAddressUtils.ripeMD160Hash(this.getPubKey());
 //        return Arrays.equals(lockingHash, pubKeyHash);
 //    }
+
+    /**
+     * 判断解锁数据是否能够解锁交易输出
+     *
+     * @param unlockingData
+     * @return
+     */
+    public boolean canUnlockOutputWith(String unlockingData) {
+        return this.getScriptSig().endsWith(unlockingData);
+    }
 
 }

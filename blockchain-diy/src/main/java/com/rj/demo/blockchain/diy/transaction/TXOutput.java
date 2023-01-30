@@ -23,6 +23,7 @@ public class TXOutput {
      */
     private int value;
 
+    //锁定脚本
     private String scriptPubKey;
 //    /**
 //     * 公钥Hash
@@ -52,5 +53,15 @@ public class TXOutput {
 //    public boolean isLockedWithKey(byte[] pubKeyHash) {
 //        return Arrays.equals(this.getPubKeyHash(), pubKeyHash);
 //    }
+
+    /**
+     * 判断解锁数据是否能够解锁交易输出
+     *
+     * @param unlockingData
+     * @return
+     */
+    public boolean canBeUnlockedWith(String unlockingData) {
+        return this.getScriptPubKey().endsWith(unlockingData);
+    }
 
 }

@@ -2,7 +2,7 @@ package com.rj.demo.blockchain.diy.util;
 
 import com.google.common.collect.Maps;
 import com.rj.demo.blockchain.diy.block.Block;
-import com.rj.demo.blockchain.diy.block.TXOutput;
+import com.rj.demo.blockchain.diy.transaction.TXOutput;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.rocksdb.RocksDB;
