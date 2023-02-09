@@ -1,5 +1,6 @@
 package com.rj.demo.blockchain.diy.block;
 
+import com.rj.demo.blockchain.diy.transaction.SpendableOutputResult;
 import com.rj.demo.blockchain.diy.transaction.TXInput;
 import com.rj.demo.blockchain.diy.transaction.TXOutput;
 import com.rj.demo.blockchain.diy.transaction.Transaction;
@@ -75,7 +76,7 @@ public class Blockchain {
          *
          * @return
          */
-        public boolean hashNext() throws Exception {
+        public boolean hasNext() throws Exception {
             if (StringUtils.isBlank(currentBlockHash)) {
                 return false;
             }
@@ -108,16 +109,16 @@ public class Blockchain {
 
     /**
      * 查找钱包地址对应的所有未花费的交易
-     *
+     * 确切地说是，未被完全花费的交易，可能花费了一部分，也可能根本没有花费过。
      * @param address 钱包地址
      * @return
      */
     private Transaction[] findUnspentTransactions(String address) throws Exception {
-        Map<String, int[]> allSpentTXOs = this.findSpendableOutputs(address);
+        Map<String, int[]> allSpentTXOs = this.findAllSpentOutputs(address);
         Transaction[] unspentTxs = {};
 
         // 再次遍历所有区块中的交易输出
-        for (BlockchainIterator blockchainIterator = this.getBlockchainIterator(); blockchainIterator.hashNext(); ) {
+        for (BlockchainIterator blockchainIterator = this.getBlockchainIterator(); blockchainIterator.hasNext(); ) {
             Block block = blockchainIterator.next();
             for (Transaction transaction : block.getTransactions()) {
 
@@ -148,10 +149,10 @@ public class Blockchain {
      * @return 交易ID以及对应的交易输出下标地址
      * @throws Exception
      */
-     public Map<String, int[]> findSpendableOutputs(String address) throws Exception {
+     public Map<String, int[]> findAllSpentOutputs(String address) throws Exception {
         // 定义TxId ——> spentOutIndex[]，存储交易ID与已被花费的交易输出数组索引值
         Map<String, int[]> spentTXOs = new HashMap<>();
-        for (BlockchainIterator blockchainIterator = this.getBlockchainIterator(); blockchainIterator.hashNext(); ) {
+        for (BlockchainIterator blockchainIterator = this.getBlockchainIterator(); blockchainIterator.hasNext(); ) {
             Block block = blockchainIterator.next();
 
             for (Transaction transaction : block.getTransactions()) {
@@ -178,7 +179,7 @@ public class Blockchain {
 
     /**
      * 查找钱包地址对应的所有UTXO
-     *
+     * UTXO 包含在UTX中 （确切地说是，未被完全花费的交易，可能花费了一部分，也可能根本没有花费过。）
      * @param address 钱包地址
      * @return
      */
@@ -196,5 +197,43 @@ public class Blockchain {
             }
         }
         return utxos;
+    }
+
+
+    /**
+     * 寻找能够花费的交易
+     *
+     * @param address 钱包地址
+     * @param amount  花费金额
+     */
+    public SpendableOutputResult findSpendableOutputs(String address, int amount) throws Exception {
+        Transaction[] unspentTXs = this.findUnspentTransactions(address);
+        int accumulated = 0;
+        Map<String, int[]> unspentOuts = new HashMap<>();
+        for (Transaction tx : unspentTXs) {
+
+            String txId = Hex.encodeHexString(tx.getTxId());
+
+            for (int outId = 0; outId < tx.getOutputs().length; outId++) {
+
+                TXOutput txOutput = tx.getOutputs()[outId];
+
+                if (txOutput.canBeUnlockedWith(address) && accumulated < amount) {
+                    accumulated += txOutput.getValue();
+
+                    int[] outIds = unspentOuts.get(txId);
+                    if (outIds == null) {
+                        outIds = new int[]{outId};
+                    } else {
+                        outIds = ArrayUtils.add(outIds, outId);
+                    }
+                    unspentOuts.put(txId, outIds);
+                    if (accumulated >= amount) {
+                        break;
+                    }
+                }
+            }
+        }
+        return new SpendableOutputResult(accumulated, unspentOuts);
     }
 }

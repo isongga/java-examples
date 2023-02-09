@@ -6,9 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 
-import java.math.BigInteger;
 import java.time.Instant;
 
 @Data
@@ -51,7 +49,7 @@ public class Block {
         return Block.newBlock("", new Transaction[]{coinbase});
     }
 
-    public byte[] hashTransaction() {
+    public byte[] hashTransactions() {
         byte[][] txIdArrays = new byte[this.getTransactions().length][];
         for (int i = 0; i < this.getTransactions().length; i++) {
             txIdArrays[i] = this.getTransactions()[i].getTxId();

@@ -54,7 +54,7 @@ public class Transaction {
      * @return
      */
     public static Transaction newUTXOTransaction(String from, String to, int amount, Blockchain blockchain) throws Exception {
-        SpendableOutputResult result = new SpendableOutputResult(amount, blockchain.findSpendableOutputs(from));
+        SpendableOutputResult result = blockchain.findSpendableOutputs(from,amount);
         int accumulated = result.getAccumulated();
         Map<String, int[]> unspentOuts = result.getUnspentOuts();
 
